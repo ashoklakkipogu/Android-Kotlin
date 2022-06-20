@@ -11,8 +11,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.MediumTest
 import com.cba.transactions.R
 import com.cba.transactions.base.RecyclerBaseAdapter
-import com.cba.transactions.getOrAwaitValue
 import com.cba.transactions.data.local.entry.ShoppingItem
+import com.cba.transactions.getOrAwaitValue
 import com.cba.transactions.launchFragmentInHiltContainer
 import com.cba.transactions.ui.adapter.ShoppingItemAdapter
 import com.cba.transactions.viewmodel.ShoppingViewModel
@@ -25,6 +25,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.*
 import javax.inject.Inject
+
+
+
 @MediumTest
 @HiltAndroidTest
 @ExperimentalCoroutinesApi
@@ -48,22 +51,21 @@ class ShoppingFragmentTest {
     fun swipeShoppingItem_deleteItemInDb() {
         val shoppingItem = ShoppingItem("TEST", 1, 1f, "TEST", 1)
         var testViewModel: ShoppingViewModel? = null
-        launchFragmentInHiltContainer<ShoppingFragment>(
+        launchFragmentInHiltContainer<ShoppingSecondFragment>(
             fragmentFactory = testFragmentFactory
         ) {
-            var frag = this as ShoppingFragment
-            testViewModel = mViewModel
-            mViewModel?.insertShoppingItemIntoDb(shoppingItem)
+            testViewModel = viewmodel
+            mViewModel.insertShoppingItemIntoDb(shoppingItem)
         }
 
-        /*onView(withId(R.id.rvShoppingItems)).perform(
+        onView(withId(R.id.rvShoppingItems)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerBaseAdapter<ShoppingItemAdapter>.MyViewHolder>(
                 0,
                 swipeLeft()
             )
         )
 
-        assertThat(testViewModel?.shoppingItems?.getOrAwaitValue()).isEmpty()*/
+        assertThat(testViewModel?.shoppingItems?.getOrAwaitValue()).isEmpty()
     }
 
     @Test
@@ -83,8 +85,6 @@ class ShoppingFragmentTest {
         )
     }
 }
-
-
 
 
 

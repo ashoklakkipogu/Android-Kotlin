@@ -27,7 +27,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideShoppingItemDatabase(@ApplicationContext context: Context): ShoppingDatabase {
-        return Room.databaseBuilder(context, ShoppingDatabase::class.java, ShoppingDatabase.DATABASE).build()
+        return Room.databaseBuilder(context, ShoppingDatabase::class.java, ShoppingDatabase.DATABASE).allowMainThreadQueries().build()
     }
 
 

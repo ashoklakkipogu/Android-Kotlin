@@ -30,9 +30,12 @@ class ImagePickFragment @Inject constructor() :
     override fun getViewModelClass() = ShoppingViewModel::class.java
 
     override fun getLayoutResourceId() = R.layout.fragment_image_pick
+    var viewmodel:ShoppingViewModel? = null
 
 
     override fun initView() {
+        viewmodel = viewModel
+
         setupRecyclerView()
         subscribeToObservers()
 

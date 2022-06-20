@@ -51,9 +51,7 @@ class AddShoppingItemFragmentTest {
         launchFragmentInHiltContainer<AddShoppingItemFragment>(
             fragmentFactory = fragmentFactory
         ) {
-            var frag = this as AddShoppingItemFragment
-
-            mViewModel = testViewModel
+            viewmodel = testViewModel
         }
 
         onView(withId(R.id.etShoppingItemName)).perform(replaceText("shopping item"))

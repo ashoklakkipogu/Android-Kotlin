@@ -51,10 +51,9 @@ class ImagePickFragmentTest {
         val imageUrl = "TEST"
         val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
         launchFragmentInHiltContainer<ImagePickFragment>(fragmentFactory = fragmentFactory) {
-            var frag = this as ImagePickFragment
             Navigation.setViewNavController(requireView(), navController)
             mImageAdapter.updateData(listOf(imageUrl))
-            mViewModel = testViewModel
+            viewmodel = testViewModel
         }
 
         onView(withId(R.id.rvImages)).perform(

@@ -21,9 +21,12 @@ class AddShoppingItemFragment @Inject constructor() :
     override fun getViewModelClass() = ShoppingViewModel::class.java
 
     override fun getLayoutResourceId() = R.layout.fragment_add_shopping_item
+    var viewmodel:ShoppingViewModel? = null
 
 
     override fun initView() {
+        viewmodel = viewModel
+
         subscribeToObservers()
         btnAddShoppingItem.setOnClickListener {
             viewModel.insertShoppingItem(
@@ -42,7 +45,7 @@ class AddShoppingItemFragment @Inject constructor() :
 
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("url")?.observe(
             viewLifecycleOwner) { result ->
-            viewModel.setCurImageUrl(result)
+            mViewModel.setCurImageUrl(result)
         }
 
 

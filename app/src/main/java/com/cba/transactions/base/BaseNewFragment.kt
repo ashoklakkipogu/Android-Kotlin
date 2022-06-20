@@ -10,10 +10,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.cba.transactions.viewmodel.ShoppingViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
-abstract class BaseFragment<B : ViewDataBinding, V : ViewModel> : Fragment() {
+abstract class BaseNewFragment<B : ViewDataBinding, V : ViewModel> : Fragment() {
 
     private lateinit var mViewDataBinding: B
     public lateinit var mViewModel: V
@@ -58,4 +59,5 @@ abstract class BaseFragment<B : ViewDataBinding, V : ViewModel> : Fragment() {
     protected fun snackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
+
 }
