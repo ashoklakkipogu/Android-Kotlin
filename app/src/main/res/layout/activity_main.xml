@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="handlers"
+            type="com.cba.transactions.ui.activity.MainActivity" />
+
+        <variable
+            name="account"
+            type="com.cba.transactions.data.model.Account" />
+
+        <variable
+            name="adapter"
+            type="com.cba.transactions.ui.adapter.TransactionAdapter" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.activity.MainActivity">
+
+
+                <TextView
+                    android:id="@+id/available_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Available"
+                    android:textColor="@color/color_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/available_bal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text='@{"$"+account.available}'
+                    android:textColor="@color/color_1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/available_label" />
+
+                <TextView
+                    android:id="@+id/bal_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Balance"
+                    android:textColor="@color/color_2"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/available_bal" />
+
+                <TextView
+                    android:id="@+id/bal_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text='@{"$"+account.balance}'
+                    android:textColor="@color/color_1"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bal_label"
+                    app:layout_constraintStart_toEndOf="@+id/bal_label"
+                    app:layout_constraintTop_toTopOf="@+id/bal_label" />
+
+                <TextView
+                    android:id="@+id/pending_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending"
+                    android:textColor="@color/color_2"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/bal_label" />
+
+                <TextView
+                    android:id="@+id/pending_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text='@{"$"+account.pendingBal}'
+                    android:textColor="@color/color_1"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pending_label"
+                    app:layout_constraintStart_toEndOf="@+id/pending_label"
+                    app:layout_constraintTop_toTopOf="@+id/pending_label" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pending_label" />
+
+                <TextView
+                    android:id="@+id/bsb_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="BSB"
+                    android:textColor="@color/color_1"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+                <TextView
+                    android:id="@+id/bsb_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text='@{account.bsb}'
+                    android:textColor="@color/color_2"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bsb_label"
+                    app:layout_constraintStart_toEndOf="@+id/bsb_label"
+                    app:layout_constraintTop_toTopOf="@+id/bsb_label" />
+
+                <TextView
+                    android:id="@+id/acc_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Account"
+                    android:textColor="@color/color_1"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bsb_label"
+                    app:layout_constraintStart_toEndOf="@+id/bsb_val"
+                    app:layout_constraintTop_toTopOf="@+id/bsb_label" />
+
+                <TextView
+                    android:id="@+id/acc_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textColor="@color/color_2"
+                    android:textSize="14sp"
+                    app:account='@{account.accountNumber}'
+                    app:layout_constraintBottom_toBottomOf="@+id/acc_label"
+                    app:layout_constraintStart_toEndOf="@+id/acc_label"
+                    app:layout_constraintTop_toTopOf="@+id/acc_label" />
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bsb_label" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:adapter="@{adapter}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+                <View
+                    android:id="@+id/shimmer_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                        <include layout="@layout/loading_view" />
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_voice" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
